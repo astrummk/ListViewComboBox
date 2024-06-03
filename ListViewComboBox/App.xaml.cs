@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using ListViewComboBox.Views;
+
 namespace ListViewComboBox
 {
     public partial class App : Application
@@ -10,7 +12,7 @@ namespace ListViewComboBox
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new Main();
         }
 
         protected override void OnStart()
