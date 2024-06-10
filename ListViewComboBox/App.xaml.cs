@@ -13,6 +13,8 @@ namespace ListViewComboBox
             InitializeComponent();
 
             MainPage = new Main();
+
+            //MainPage = new Main(new MainBookViewModels());
         }
 
         protected override void OnStart()

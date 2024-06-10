@@ -1,12 +1,163 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ListViewComboBox.ViewModels"
+                x:Name="currentPage"
              x:Class="ListViewComboBox.Views.Main">
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding masasel}" />
+
+        <ToolbarItem Text="{Binding vkupno}" />
+        <ToolbarItem Text="одјава" Command="{Binding BackCommand}" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+
+        <Grid >
+            <StackLayout x:Name="grupaStack" Padding="1,0,1,0" >
+
+                <!--<StackLayout>-->
+                <!--<Label Text="{Binding masasel}" FontSize="Small" />-->
+                <!--1</StackLayout>-->
+
+                <!-- Poracka-->
+                <StackLayout>
+                    <ListView
+                    x:Name="PorackaList"
+                    BackgroundColor = "Bisque"
+                    ItemSelected = "BookID_ItemSelected"    
+                    HeightRequest="480"
+                    ItemsSource = "{x:Static local:MainBookViewModel.books}"
+                    RefreshCommand="{Binding LoadPorackaCommand}"               
+                    >
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.View>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="40" />
+                                                <ColumnDefinition Width="40" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Column="0" Text="{Binding PorackaNaziv}" FontSize="Small" TextColor="Black" />
+
+                                            <Label Grid.Column="1" Text="{Binding PorackaKol}" FontSize="Small" TextColor="Black"/>
+                                            <Label Grid.Column="2" Text="{Binding PorackaCena}" FontSize="Small" TextColor="Black" HorizontalTextAlignment="End">
+                                                <Label.GestureRecognizers  >
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference currentPage}, Path=BindingContext.CmdOpis}" 
+NumberOfTapsRequired="1" CommandParameter="{Binding PorackaID}" />
+                                                </Label.GestureRecognizers>
+                                            </Label>
+                                        </Grid>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+                </StackLayout>
+
+                <!-- Kopcinja-->
+                <StackLayout  >
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <!--<RowDefinition Height="40" />-->
+                            <!--<RowDefinition Height="40" />-->
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="85" />
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="50" />
+                        </Grid.ColumnDefinitions>
+                        <!--<Label Grid.Row="0" Grid.Column="0" Text="Вкупно" />-->
+                        <!--<Label Grid.Row="0" Grid.Column="1" x:Name="lblTest" Text="{Binding vkupno}" TextColor="Blue"/>-->
+
+                        <Entry Grid.Row="0" Grid.Column="0" x:Name="MasaBr" Text="{Binding mas}" HorizontalOptions="Start" Placeholder="Маса" Keyboard="Numeric" MaxLength="3" WidthRequest="40" />
+                        <Button Grid.Row="0" Grid.Column="1" x:Name="Otvori" Command="{Binding CmdOtvori}" CommandParameter="{Binding Source={x:Reference MasaBr}, Path=Text}" Text="Отвори" HorizontalOptions="Center" WidthRequest="85" />
+                        <Button Grid.Row="0" Grid.Column="2" x:Name="Naracaj" Command="{Binding CmdNaracaj}" CommandParameter="{Binding Source={x:Reference MasaBr}, Path=Text}" Text="Нарачај" HorizontalOptions="Center" WidthRequest="90" FontSize="Small" />
+
+                        <Button Grid.Row="0" Grid.Column="3" x:Name="btnPlus" Command="{Binding CmdClick}" CommandParameter="1" Text="+1" HorizontalOptions="Center" WidthRequest="50" />
+                        <Button Grid.Row="0" Grid.Column="4" x:Name="btnMinus" Command="{Binding CmdClick}" CommandParameter="-1" Text="-1" HorizontalOptions="Center" WidthRequest="50" />
+
+                    </Grid>
+                </StackLayout>
+
+                <!--Glavno MENI-->
+                <StackLayout>
+                    <ListView
+                    x:Name="GrupaList"
+                    BackgroundColor="White"
+                    IsGroupingEnabled="True"
+                    IsPullToRefreshEnabled="true"
+                    IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                    ItemsSource="{Binding Items}"
+                    RefreshCommand="{Binding LoadGrupaCommand}"
+                     
+                    >
+                        <!--Meni GRUPI 2-->
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+
+                                    <Grid>
+                                        <Label
+                                        BackgroundColor="{Binding ProductTypeID}"
+                                        VerticalOptions="Center"
+                                        FontAttributes="None"
+                                        FontSize="Medium"
+                                        Text="{Binding ProduktNaziv}"
+                                        TextColor="White"
+                                        VerticalTextAlignment="Center">
+                                        </Label>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference currentPage}, Path=BindingContext.CmdNaziv}" 
+                                                                  NumberOfTapsRequired="1" CommandParameter="{Binding ProduktGrupaID}" />
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                        <!--Meni GRUPI 1-->
+                        <ListView.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Label
+                                        BackgroundColor = "#1f8cec"
+                                                FontAttributes="Bold"
+                                                FontSize="Medium"
+                                                Text="{Binding GrupaNaziv}"
+                                                TextColor="White"
+                                                VerticalTextAlignment="Center" />
+                                        <Image x:Name="ImgA" Source="{Binding StateIcon}"  Margin="0,0,5,0" HeightRequest="20" WidthRequest="20" HorizontalOptions="End"/>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference currentPage}, Path=BindingContext.RefreshItemsCommand}"  
+                                                              NumberOfTapsRequired="1" CommandParameter="{Binding .}"/>
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.GroupHeaderTemplate>
+
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+
     </ContentPage.Content>
+    
+    
 </ContentPage>
