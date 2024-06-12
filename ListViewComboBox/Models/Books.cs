@@ -15,5 +15,13 @@ namespace ListViewComboBox.Models
         { 
         
         }
+
+        public Books(string bookID, string bookTitle, string bookDescription, string bookType)
+        {
+            BookID = bookID;
+            BookTitle = bookTitle;
+            BookDescription = bookDescription;
+            BookType = bookType;
+        }
     }
 }

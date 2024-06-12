@@ -116,13 +116,13 @@ NumberOfTapsRequired="1" CommandParameter="{Binding PorackaID}" />
                                         VerticalOptions="Center"
                                         FontAttributes="None"
                                         FontSize="Medium"
-                                        Text="{Binding ProduktNaziv}"
+                                        Text="{Binding BookTitle}"
                                         TextColor="White"
                                         VerticalTextAlignment="Center">
                                         </Label>
                                         <Grid.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Source={x:Reference currentPage}, Path=BindingContext.CmdNaziv}" 
-                                                                  NumberOfTapsRequired="1" CommandParameter="{Binding ProduktGrupaID}" />
+                                                                  NumberOfTapsRequired="1" CommandParameter="{Binding BookID}" />
                                         </Grid.GestureRecognizers>
                                     </Grid>
 
