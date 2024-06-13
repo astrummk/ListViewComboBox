@@ -51,11 +51,11 @@ namespace ListViewComboBox.Views
                 //vcituvanje na App.config
                 //string userid = PCLAppConfig.ConfigurationManager.AppSettings["UserID"];
 
-                //if (ViewModel.Items.Count == 0)
-                //{
-                //    ViewModel.LoadGrupaCommand.Execute(null);
-                //    ViewModel.LoadPorackaCommand.Execute(null);
-                //}
+                if (ViewModel.Items.Count == 0)
+                {
+                    ViewModel.LoadGrupaCommand.Execute(null);
+                    //ViewModel.LoadPorackaCommand.Execute(null);
+                }
             }
             catch (Exception ex)
             {

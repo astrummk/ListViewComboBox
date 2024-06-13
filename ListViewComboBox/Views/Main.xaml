@@ -29,7 +29,7 @@
                     BackgroundColor = "Bisque"
                     ItemSelected = "BookID_ItemSelected"    
                     HeightRequest="480"
-                    ItemsSource = "{x:Static local:MainBookViewModel.books}"
+                    ItemsSource = "{x:Static local:MainBookViewModel.booksList}"
                     RefreshCommand="{Binding LoadPorackaCommand}"               
                     >
 
@@ -112,12 +112,12 @@ NumberOfTapsRequired="1" CommandParameter="{Binding PorackaID}" />
 
                                     <Grid>
                                         <Label
-                                        BackgroundColor="{Binding ProductTypeID}"
+                                        BackgroundColor="Yellow"
                                         VerticalOptions="Center"
                                         FontAttributes="None"
                                         FontSize="Medium"
                                         Text="{Binding BookTitle}"
-                                        TextColor="White"
+                                        TextColor="Black"
                                         VerticalTextAlignment="Center">
                                         </Label>
                                         <Grid.GestureRecognizers>
@@ -136,11 +136,11 @@ NumberOfTapsRequired="1" CommandParameter="{Binding PorackaID}" />
                                 <ViewCell>
                                     <Grid>
                                         <Label
-                                        BackgroundColor = "#1f8cec"
+                                        BackgroundColor = "White"
                                                 FontAttributes="Bold"
                                                 FontSize="Medium"
-                                                Text="{Binding GrupaNaziv}"
-                                                TextColor="White"
+                                                Text="{Binding BookTypeDesc}"
+                                                TextColor="Black"
                                                 VerticalTextAlignment="Center" />
                                         <Image x:Name="ImgA" Source="{Binding StateIcon}"  Margin="0,0,5,0" HeightRequest="20" WidthRequest="20" HorizontalOptions="End"/>
                                         <Grid.GestureRecognizers>

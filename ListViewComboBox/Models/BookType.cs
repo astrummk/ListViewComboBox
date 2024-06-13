@@ -6,8 +6,14 @@ namespace ListViewComboBox.Models
 {
     public class BookType
     {
-        public string BookTypeID { get; set; }
         public string BookTypeDesc { get; set; }
+        public List<Books> Books { get; set; }
+
+        public BookType(string bookDesc, List<Books> books)
+        {
+            BookTypeDesc = bookDesc;
+            Books = books;
+        }
 
         public BookType() 
         { 

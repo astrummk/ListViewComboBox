@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using ListViewComboBox.ViewModels;
 using ListViewComboBox.Views;
 
 namespace ListViewComboBox
@@ -12,7 +12,8 @@ namespace ListViewComboBox
         {
             InitializeComponent();
 
-            MainPage = new Main();
+            MainPage = new Main(new MainBookViewModel());
+            //Glavna(new GrupaGroupViewModels())
 
             //MainPage = new Main(new MainBookViewModels());
         }
